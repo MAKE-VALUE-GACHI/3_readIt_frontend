@@ -1,3 +1,5 @@
+import Provider from "./provider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -5,7 +7,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   )
 }
