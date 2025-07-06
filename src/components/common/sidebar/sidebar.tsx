@@ -32,7 +32,7 @@ const Sidebar = () => {
                     if (hasChildren) {
                       setOpenMyMenu(prev => !prev)
                     } else {
-                      router.push(buttonProps.route)
+                      router.push(buttonProps.route!)
                     }
                   }}
                 >
@@ -44,9 +44,9 @@ const Sidebar = () => {
                       <Button
                         key={`SidebarButton_SubItem_${j}`}
                         {...childButtonProps}
-                        isActive={hasChildren ? openMyMenu : path === childButtonProps.route}
+                        isActive={path === childButtonProps.route}
                         onClick={() => {
-                          router.push(buttonProps.route)
+                          router.push(childButtonProps.route!)
                         }}
                       >
                         {childButtonProps.title}

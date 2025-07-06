@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import React from "react";
-import { Sidebar } from "@/components/common/sidebar";
+import React from 'react'
+import { Sidebar } from '@/components/common/sidebar'
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const MainUiLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="relative flex h-screen w-screen gap-4 p-4">
       {/**gradation layer */}
@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <Sidebar />
       {children}
     </main>
-  );
-};
+  )
+}
 
-export default Layout;
+export default MainUiLayout
