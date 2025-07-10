@@ -1,4 +1,4 @@
-import MainUiLayout from '@/components/layout/mainUiLayout'
+import MainUiLayout from '@/components/layout/MainUiLayout'
 
 export default function MainLayout({
   children,

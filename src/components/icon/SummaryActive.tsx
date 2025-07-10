@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Summary_active = () => {
+const SummaryActive = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -46,4 +46,4 @@ const Summary_active = () => {
   )
 }
 
-export default Summary_active
+export default SummaryActive

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Clip_active = () => {
+const ClipActive = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -13,4 +13,4 @@ const Clip_active = () => {
   )
 }
 
-export default Clip_active
+export default ClipActive
