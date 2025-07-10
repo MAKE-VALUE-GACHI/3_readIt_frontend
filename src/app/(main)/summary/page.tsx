@@ -8,14 +8,14 @@ const SummaryPage = () => {
           <h2 className="mb-5 text-xl font-bold text-[#222222]">요약</h2>
           <div className="mb-3">
             <label className="text-base font-semibold">링크 요약 정리</label>
-            <div className="bg-[#F8F8F8] p-3">
+            <div className="rounded-xl border-[1.5px] border-[#EEEEEE] bg-[#F8F8F8] p-3">
               <input type="text" placeholder="https://" />
             </div>
           </div>
 
           <div>
             <label className="text-base font-semibold">내용 정리</label>
-            <div className="rounded-xl bg-[#F8F8F8] p-3">
+            <div className="rounded-xl border-[1.5px] border-[#EEEEEE] bg-[#F8F8F8] p-3">
               <textarea className="min-h-70" placeholder="요약하고 싶은 내용을 입력해 주세요."></textarea>
               <div className="text-end text-sm text-[#AAAAAA]">0/500</div>
             </div>
