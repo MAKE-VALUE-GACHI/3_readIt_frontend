@@ -1,12 +1,18 @@
+import { Summary32px, Close } from '@/components/icon'
+
 export function SummaryFormCard() {
   return (
     <div className="relative mr-4 basis-1/3 rounded-xl bg-white p-10">
       <div>
-        <h2 className="mb-5 text-xl font-bold text-[#222222]">요약</h2>
+        <header className="mb-5 flex">
+          <Summary32px />
+          <h2 className="ml-1 text-xl font-bold text-[#222222]">요약</h2>
+        </header>
         <div className="mb-3">
           <label className="text-base font-semibold">링크 요약 정리</label>
-          <div className="rounded-xl border-[1.5px] border-[#EEEEEE] bg-[#F8F8F8] p-3">
-            <input type="text" placeholder="https://" />
+          <div className="flex items-center rounded-xl border-[1.5px] border-[#EEEEEE] bg-[#F8F8F8] p-3">
+            <input type="text" placeholder="https://" className="mr-1 w-full outline-none" />
+            <Close />
           </div>
         </div>
 
