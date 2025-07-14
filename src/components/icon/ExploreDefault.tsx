@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Explore_default = () => {
+const ExploreDefault = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -38,4 +38,4 @@ const Explore_default = () => {
   )
 }
 
-export default Explore_default
+export default ExploreDefault

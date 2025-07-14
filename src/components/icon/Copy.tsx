@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Copy = () => {
+const Copy = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg {...props} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M10.6666 8.60001V11.4C10.6666 13.7333 9.73325 14.6667 7.39992 14.6667H4.59992C2.26659 14.6667 1.33325 13.7333 1.33325 11.4V8.60001C1.33325 6.26668 2.26659 5.33334 4.59992 5.33334H7.39992C9.73325 5.33334 10.6666 6.26668 10.6666 8.60001Z"
         stroke="#222222"

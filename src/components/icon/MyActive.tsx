@@ -1,6 +1,6 @@
 import React from 'react'
 
-const My_active = () => {
+const MyActive = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -29,4 +29,4 @@ const My_active = () => {
   )
 }
 
-export default My_active
+export default MyActive
