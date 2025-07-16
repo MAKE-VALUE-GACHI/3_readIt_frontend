@@ -21,3 +21,6 @@ export { default as Storage } from './Storage'
 export { default as Summary32px } from './Summary32px'
 export { default as SummaryActive } from './SummaryActive'
 export { default as SummaryDefault } from './SummaryDefault'
+
+export { default as MessageSearch } from './MessageSearch'
+export { default as DocumentCode } from './DocumentCode'
