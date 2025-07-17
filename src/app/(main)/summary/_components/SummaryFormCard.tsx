@@ -21,7 +21,7 @@ export function SummaryFormCard() {
       console.log('요청 성공')
       router.push(`/summary/${response.data.data.task_id}`)
     } else {
-      console.log('요청 실패')
+      alert('요약을 실패하였습니다. 다시 시도해주세요.')
     }
   }
 
