@@ -41,6 +41,14 @@ export function SummaryResultCard() {
     }
   }
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(content)
+    } catch (err) {
+      console.error('복사 실패:', err)
+    }
+  }
+
   return (
     <>
       {status === 'completed' || isLoading ? (
@@ -48,7 +56,7 @@ export function SummaryResultCard() {
           <div className="mb-5 flex justify-between">
             <span className="text-xl font-bold">요약내용</span>
             <div className="flex">
-              <button className="mr-6 flex items-center">
+              <button className="mr-6 flex cursor-pointer items-center" onClick={handleCopy}>
                 복사하기
                 <Copy className="ml-1" />
               </button>
