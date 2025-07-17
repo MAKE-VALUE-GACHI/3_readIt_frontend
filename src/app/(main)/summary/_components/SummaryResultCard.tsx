@@ -1,16 +1,45 @@
 'use client'
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 import { Copy, ClipDefault, Again } from '@/components/icon'
 import { useSummaryQuery } from '@/hooks/fetch/useSummaryQuery'
+import { SummaryForm } from './SummaryFormCard'
+import { addSummary } from '@/services/summary'
+
+const summaryBtnStyle = 'rounded-4xl mr-2 border px-4 py-2 text-sm cursor-pointer'
+const activeBtnStyle = 'bg-black text-white'
+
+const summaryTypes = [
+  { key: 'basic', label: '기본 요약' },
+  { key: 'oneline', label: '한 줄 요약' },
+  { key: 'fiveline', label: '다섯 줄 요약' },
+  { key: 'insight', label: '인사이트' },
+] as const
 
 export function SummaryResultCard() {
+  const router = useRouter()
   const { data: summaryData, isLoading } = useSummaryQuery()
 
   if (!summaryData) return
 
-  const { status, subject, content } = summaryData?.data?.data ?? {}
+  const { status, subject, content, type, origin_url: originUrl } = summaryData?.data?.data ?? {}
+
+  if (status === 'failed') {
+    alert('요약에 실패하였습니다. 다시 시도해주세요.')
+    router.push(`/summary`)
+  }
+
+  const onSubmit = async (data: SummaryForm) => {
+    const response = await addSummary(data)
+
+    if (response.status === 202) {
+      router.push(`/summary/${response.data.data.task_id}`)
+    } else {
+      alert('요약을 실패하였습니다. 다시 시도해주세요.')
+    }
+  }
 
   return (
     <>
@@ -36,9 +65,15 @@ export function SummaryResultCard() {
             </div>
             <div className="flex justify-between">
               <div>
-                <button className="rounded-4xl mr-2 border px-4 py-2 text-sm">기본 요약</button>
-                <button className="rounded-4xl mr-2 border px-4 py-2 text-sm">한 줄 요약</button>
-                <button className="rounded-4xl mr-2 border px-4 py-2 text-sm">핵심 요약</button>
+                {summaryTypes.map(({ key, label }) => (
+                  <button
+                    key={key}
+                    onClick={() => onSubmit({ url: originUrl, content: '', type: key })}
+                    className={`${summaryBtnStyle} ${type === key ? activeBtnStyle : ''}`}
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
               <div className="inline-flex rounded-full bg-[linear-gradient(90deg,#BEBDFF_0%,#9F6BC4_48%,#E26466_100%)] p-[1px]">
                 <button className="flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm text-black">

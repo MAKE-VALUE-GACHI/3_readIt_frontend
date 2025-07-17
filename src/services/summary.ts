@@ -22,11 +22,11 @@ export interface SummaryData {
   created_at: string
   modified_at: string
 }
-export const addSummary = ({ url, content }: { url: string; content: string }) => {
+export const addSummary = ({ url, content, type }: { url: string; content: string; type: string }) => {
   return apiClient.post(
     `/scrap/summaries`,
     {
-      type: 'basic',
+      type: type || 'basic',
       is_public: false,
       origin_url: url || null,
       text: content || null,
