@@ -10,6 +10,7 @@ export interface SummaryFolderType {
   id: number
   name: string
   files: SummaryFileType[]
+  isNew?: boolean
 }
 
 export type SortType = 'latest' | 'oldest'
@@ -89,6 +90,7 @@ export const useSummaryList = () => {
     setOpenMenus(prev => ({ ...prev, [fileId]: open }))
   }
 
+  //링크 교체 해야함
   const handleShare = async (fileId: number, shareUrl = 'https://google.com') => {
     await navigator.clipboard.writeText(shareUrl)
     setOpenMenus(prev => ({ ...prev, [fileId]: false }))
@@ -100,8 +102,13 @@ export const useSummaryList = () => {
   }
 
   const handleCreateFolder = (name: string) => {
-    setFolders(prev => [...prev, { id: Date.now(), name, files: [] }])
+    const newFolder = { id: Date.now(), name, files: [], isNew: true }
+    setFolders(prev => [...prev, newFolder])
     setCreating(false)
+
+    setTimeout(() => {
+      setFolders(prev => prev.map(folder => (folder.id === newFolder.id ? { ...folder, isNew: false } : folder)))
+    }, 500)
   }
 
   const handleSort = (type: SortType) => {

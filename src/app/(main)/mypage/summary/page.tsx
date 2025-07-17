@@ -1,13 +1,13 @@
 'use client'
 
-import { toast } from 'sonner'
-import { Toaster } from '@/components/ui/sonner'
+import { toast } from 'react-hot-toast'
 import { useSummaryList } from './_hooks/useSummaryList'
 import SearchBar from './_components/SearchBar'
 import FolderSectionHeader from './_components/FolderSectionHeader'
 import SummaryFolder from './_components/SummaryFolder'
 import SummaryFile from './_components/SummaryFile'
 import { User, CheckGreen } from '@/components/icon'
+import { ScaleIn } from '@/components/motion'
 import React from 'react'
 
 export default function SummaryPage() {
@@ -32,13 +32,8 @@ export default function SummaryPage() {
   const handleShare = async (fileId: number) => {
     await originalHandleShare(fileId)
     toast.success('복사 완료', {
-      position: 'bottom-center',
       icon: <CheckGreen />,
       style: {
-        width: 'fit-content',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '20px',
         background: 'white',
         color: 'black',
         border: 'none',
@@ -47,6 +42,10 @@ export default function SummaryPage() {
         padding: '16px 32px',
         boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
         fontSize: '16px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px',
+        width: 'fit-content',
       },
     })
   }
@@ -80,16 +79,22 @@ export default function SummaryPage() {
               />
               <div className="space-y-2">
                 {filteredFolders.map(folder => (
-                  <SummaryFolder
+                  <ScaleIn
                     key={folder.id}
-                    id={folder.id}
-                    name={folder.name}
-                    files={folder.files}
-                    open={!!openFolders[folder.id]}
-                    onToggle={toggleFolder}
+                    animateKey={folder.isNew ? folder.id : undefined}
+                    duration={folder.isNew ? 0.4 : 0}
+                    initialScale={folder.isNew ? 0.8 : 1}
                   >
-                    {sortFiles(folder.files.filter(file => file.name.toLowerCase().includes(search.toLowerCase()))).map(
-                      file => (
+                    <SummaryFolder
+                      id={folder.id}
+                      name={folder.name}
+                      files={folder.files}
+                      open={!!openFolders[folder.id]}
+                      onToggle={toggleFolder}
+                    >
+                      {sortFiles(
+                        folder.files.filter(file => file.name.toLowerCase().includes(search.toLowerCase())),
+                      ).map(file => (
                         <SummaryFile
                           key={file.id}
                           id={file.id}
@@ -98,9 +103,9 @@ export default function SummaryPage() {
                           onShare={() => handleShare(file.id)}
                           onDelete={() => handleDelete(file.id)}
                         />
-                      ),
-                    )}
-                  </SummaryFolder>
+                      ))}
+                    </SummaryFolder>
+                  </ScaleIn>
                 ))}
               </div>
             </section>
@@ -123,7 +128,6 @@ export default function SummaryPage() {
           </div>
         </div>
       </div>
-      <Toaster />
     </div>
   )
 }

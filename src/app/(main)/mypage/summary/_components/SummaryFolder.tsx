@@ -1,6 +1,7 @@
 import React from 'react'
 import { Storage, Arrow } from '@/components/icon'
 import { SummaryFileType } from '../_hooks/useSummaryList'
+import { Collapse, RotateIcon } from '@/components/motion'
 
 interface SummaryFolderProps {
   id: number
@@ -27,11 +28,13 @@ export default function SummaryFolder({ id, name, files, open, onToggle, childre
             <div className="text-gray-medium text-xs">{files.length}개 파일</div>
           </div>
         </div>
-        <div className={`transition-transform duration-200 ${open ? 'rotate-180' : 'rotate-90'}`}>
+        <RotateIcon isRotated={!open} rotation={180}>
           <Arrow />
-        </div>
+        </RotateIcon>
       </div>
-      {open && <div className="ml-6 mt-2 space-y-1">{children}</div>}
+      <Collapse isOpen={open} className="ml-6 mt-2">
+        <div className="space-y-1">{children}</div>
+      </Collapse>
     </div>
   )
 }
