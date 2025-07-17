@@ -15,7 +15,6 @@ export function SummaryFormCard() {
   const router = useRouter()
   const { register, handleSubmit, watch, control } = useForm<SummaryForm>()
   const onSubmit = async (data: SummaryForm) => {
-    data.url = 'https://n.news.naver.com/mnews/article/421/0008369058'
     const response = await addSummary(data)
 
     if (response.status === 202) {
@@ -26,8 +25,11 @@ export function SummaryFormCard() {
     }
   }
 
+  const urlValue = watch('url') || ''
   const contentValue = watch('content') || ''
   const contentLength = contentValue.length
+
+  const isFilled = urlValue.trim() !== '' || contentValue.trim() !== ''
 
   return (
     <div className="relative mr-4 basis-1/3 rounded-xl bg-white p-10">
@@ -73,8 +75,11 @@ export function SummaryFormCard() {
         </div>
 
         <button
+          disabled={!isFilled}
           type="submit"
-          className="absolute inset-x-10 bottom-10 h-14 rounded-lg bg-[#F8F8F8] text-lg font-semibold text-[#aaaaaa]"
+          className={`absolute inset-x-10 bottom-10 h-14 rounded-lg text-lg font-semibold text-[#aaaaaa] ${
+            isFilled ? 'bg-primary text-white' : 'bg-[#F8F8F8] text-[#aaaaaa]'
+          }`}
         >
           자동완성
         </button>
