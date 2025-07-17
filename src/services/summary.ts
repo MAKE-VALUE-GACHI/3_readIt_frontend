@@ -2,7 +2,7 @@ import { apiClient } from '@/lib/httpClient'
 
 export interface SummaryResponse {
   status: string
-  code: any
+  code: null
   message: string
   data: SummaryData
 }

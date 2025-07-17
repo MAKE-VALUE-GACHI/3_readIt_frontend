@@ -22,7 +22,7 @@ export function SummaryResultCard() {
   const router = useRouter()
   const { data: summaryData, isLoading } = useSummaryQuery()
 
-  if (!summaryData) return
+  if (!summaryData) return null
 
   const { status, subject, content, text, type, origin_url: originUrl } = summaryData?.data?.data ?? {}
 
