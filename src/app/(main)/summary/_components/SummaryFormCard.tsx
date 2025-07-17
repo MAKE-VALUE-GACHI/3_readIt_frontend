@@ -6,15 +6,18 @@ import { useForm, Controller } from 'react-hook-form'
 import { Summary32px, Close } from '@/components/icon'
 import { addSummary } from '@/services/summary'
 
-interface SummaryForm {
+export interface SummaryForm {
   url: string
   content: string
+  type: string
 }
 
 export function SummaryFormCard() {
   const router = useRouter()
   const { register, handleSubmit, watch, control } = useForm<SummaryForm>()
+
   const onSubmit = async (data: SummaryForm) => {
+    data.type = 'basic'
     const response = await addSummary(data)
 
     if (response.status === 202) {

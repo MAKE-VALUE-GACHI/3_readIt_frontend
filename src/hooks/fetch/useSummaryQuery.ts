@@ -9,7 +9,10 @@ export function useSummaryQuery() {
   return useQuery({
     queryKey: ['summary', { id }],
     queryFn: () => getSummary(`${id}`),
-    refetchInterval: 500,
+    refetchInterval: (data: any) => {
+      const status = data?.state?.data?.data?.data?.status
+      return status === 'completed' || status === 'failed' ? false : 1000
+    },
     enabled: !!id,
   })
 }
