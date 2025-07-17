@@ -19,26 +19,31 @@ export const useSummaryList = () => {
   const [folders, setFolders] = useState<SummaryFolderType[]>([
     {
       id: 1,
-      name: '요약리스트01',
+      name: '아무거나나',
       files: [
-        { id: 11, name: '유튜브 요약본', date: '2025.05.30' },
-        { id: 12, name: '유튜브 요약본', date: '2025.05.30' },
+        { id: 11, name: '침착맨 삼국지', date: '2025.07.08' },
+        { id: 12, name: '주우재 너에게 닿기를 감상록', date: '2025.07.08' },
+        { id: 13, name: '안성재 셰프의 김치찌개 잘 끓이는법', date: '2025.07.10' },
       ],
     },
     {
       id: 2,
-      name: '요약리스트02',
+      name: '책',
       files: [
-        { id: 21, name: '유튜브 요약본', date: '2025.05.29' },
-        { id: 22, name: '유튜브 요약본', date: '2025.05.28' },
+        { id: 21, name: '눈먼 자들의 도시', date: '2025.07.07' },
+        { id: 22, name: '15소년 표류기', date: '2025.07.10' },
+        { id: 23, name: '데미안', date: '2025.07.11' },
+        { id: 24, name: '운수 좋은 날', date: '2025.07.12' },
+        { id: 25, name: '변신', date: '2025.07.12' },
       ],
     },
     {
       id: 3,
-      name: '요약리스트03',
+      name: '유튜브',
       files: [
-        { id: 31, name: '유튜브 요약본', date: '2025.04.30' },
-        { id: 32, name: '유튜브 요약본', date: '2025.03.30' },
+        { id: 31, name: '궤도의 미시세계 특강', date: '2025.07.12' },
+        { id: 32, name: '노홍철의 남극여행기', date: '2025.07.14' },
+        { id: 33, name: '최준 브이로그 10분 요약', date: '2025.07.14' },
       ],
     },
   ])
@@ -97,7 +102,12 @@ export const useSummaryList = () => {
   }
 
   const handleDelete = (fileId: number) => {
-    //삭제로직 추가
+    setFolders(prev =>
+      prev.map(folder => ({
+        ...folder,
+        files: folder.files.filter(file => file.id !== fileId),
+      })),
+    )
     setOpenMenus(prev => ({ ...prev, [fileId]: false }))
   }
 
