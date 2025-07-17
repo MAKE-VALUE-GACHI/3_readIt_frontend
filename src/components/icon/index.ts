@@ -29,3 +29,6 @@ export { default as SummaryDefault } from './SummaryDefault'
 export { default as Search } from './Search'
 
 export { default as User } from './User'
+
+export { default as MessageSearch } from './MessageSearch'
+export { default as DocumentCode } from './DocumentCode'
