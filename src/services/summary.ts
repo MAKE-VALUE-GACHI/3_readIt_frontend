@@ -1,5 +1,27 @@
 import { apiClient } from '@/lib/httpClient'
 
+export interface SummaryResponse {
+  status: string
+  code: any
+  message: string
+  data: SummaryData
+}
+
+export interface SummaryData {
+  id: number
+  status: string
+  user_id: number
+  category_id: number
+  origin_url: string
+  type: string
+  subject: string
+  content: string
+  is_public: boolean
+  like_count: number
+  view_count: number
+  created_at: string
+  modified_at: string
+}
 export const addSummary = ({ url, content }: { url: string; content: string }) => {
   return apiClient.post(
     `/scrap/summaries`,
@@ -16,4 +38,8 @@ export const addSummary = ({ url, content }: { url: string; content: string }) =
       },
     },
   )
+}
+
+export const getSummary = (id: string) => {
+  return apiClient.get<SummaryResponse>(`/scrap/summaries/${id}`)
 }
