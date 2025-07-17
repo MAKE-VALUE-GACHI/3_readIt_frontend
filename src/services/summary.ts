@@ -21,6 +21,7 @@ export interface SummaryData {
   view_count: number
   created_at: string
   modified_at: string
+  text: string
 }
 export const addSummary = ({ url, content, type }: { url: string; content: string; type: string }) => {
   return apiClient.post(

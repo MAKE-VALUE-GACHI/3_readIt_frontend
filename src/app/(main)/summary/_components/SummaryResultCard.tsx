@@ -24,7 +24,7 @@ export function SummaryResultCard() {
 
   if (!summaryData) return
 
-  const { status, subject, content, type, origin_url: originUrl } = summaryData?.data?.data ?? {}
+  const { status, subject, content, text, type, origin_url: originUrl } = summaryData?.data?.data ?? {}
 
   if (status === 'failed') {
     alert('요약에 실패하였습니다. 다시 시도해주세요.')
@@ -68,7 +68,7 @@ export function SummaryResultCard() {
                 {summaryTypes.map(({ key, label }) => (
                   <button
                     key={key}
-                    onClick={() => onSubmit({ url: originUrl, content: '', type: key })}
+                    onClick={() => onSubmit({ url: originUrl, content: text, type: key })}
                     className={`${summaryBtnStyle} ${type === key ? activeBtnStyle : ''}`}
                   >
                     {label}
@@ -76,7 +76,10 @@ export function SummaryResultCard() {
                 ))}
               </div>
               <div className="inline-flex rounded-full bg-[linear-gradient(90deg,#BEBDFF_0%,#9F6BC4_48%,#E26466_100%)] p-[1px]">
-                <button className="flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm text-black">
+                <button
+                  className="flex cursor-pointer items-center gap-1 rounded-full bg-white px-4 py-2 text-sm text-black"
+                  onClick={() => onSubmit({ url: originUrl, content: text, type })}
+                >
                   재요약
                   <Again />
                 </button>
