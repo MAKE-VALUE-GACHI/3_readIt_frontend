@@ -32,3 +32,4 @@ export { default as User } from './User'
 
 export { default as MessageSearch } from './MessageSearch'
 export { default as DocumentCode } from './DocumentCode'
+export { default as SummaryTextIntro } from './SummaryTextIntro'
