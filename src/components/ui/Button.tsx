@@ -4,6 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 import { ChevronDownIcon } from 'lucide-react'
+import { RotateIcon } from '@/components/motion'
 
 export interface ReaditButtonProps extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
   asChild?: boolean
@@ -62,12 +63,14 @@ function Button({
           {children}
         </span>
         {directionIcon && (
-          <ChevronDownIcon
-            className={cn(
-              'text-muted-foreground size-4 transition-transform duration-200',
-              isActive && 'text-primary rotate-180',
-            )}
-          />
+          <RotateIcon isRotated={isActive} rotation={180}>
+            <ChevronDownIcon
+              className={cn(
+                'text-muted-foreground size-4',
+                isActive && 'text-primary',
+              )}
+            />
+          </RotateIcon>
         )}
       </div>
     </Comp>

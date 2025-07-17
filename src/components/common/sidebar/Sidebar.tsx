@@ -6,6 +6,7 @@ import { Button } from '../../ui/Button'
 import { Alarm } from '@/components/icon'
 import { MenuRoute } from './MenuRoute'
 import { useRouter, usePathname } from 'next/navigation'
+import { Collapse } from '@/components/motion'
 
 const Sidebar = () => {
   const router = useRouter()
@@ -38,9 +39,9 @@ const Sidebar = () => {
                 >
                   {buttonProps.title}
                 </Button>
-                {buttonProps.drop && openMyMenu && (
+                <Collapse isOpen={buttonProps.drop! && openMyMenu}>
                   <div className="flex flex-col gap-1">
-                    {buttonProps.drop!.map((childButtonProps, j) => (
+                    {buttonProps.drop?.map((childButtonProps, j) => (
                       <Button
                         key={`SidebarButton_SubItem_${j}`}
                         {...childButtonProps}
@@ -53,7 +54,7 @@ const Sidebar = () => {
                       </Button>
                     ))}
                   </div>
-                )}
+                </Collapse>
               </Fragment>
             )
           })}
