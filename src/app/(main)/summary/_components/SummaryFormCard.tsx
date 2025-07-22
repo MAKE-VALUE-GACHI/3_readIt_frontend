@@ -46,7 +46,7 @@ export function SummaryFormCard() {
           <label className="text-base font-semibold">링크 요약 정리</label>
           <div className="flex items-center rounded-xl border-[1.5px] border-[#EEEEEE] bg-[#F8F8F8] p-3">
             <input type="text" placeholder="https://" className="mr-1 w-full outline-none" {...register('url')} />
-            <Close />
+            {urlValue.length > 0 && <Close />}
           </div>
         </div>
 
