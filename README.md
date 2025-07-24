@@ -7,19 +7,22 @@
 ## 폴더구조
 
 - 공통된 파일들은 용도에 맞게 src 폴더 내에 배치한다.
+```
     ㄴapp
     ㄴcomponents
     ㄴhooks
     ㄴservices
     ㄴlib
     ㄴutils
+  ```
 
 - 특정 페이지에 종속된 파일들은 각 폴더 내부에 정의한다.
-
+```
     ㄴapp
         ㄴ_components
         ㄴ_hooks
         ㄴ_utils
+```
 
 ## 커밋 컨벤션
 
