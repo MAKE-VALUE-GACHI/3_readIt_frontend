@@ -5,6 +5,7 @@ import { useForm, Controller } from 'react-hook-form'
 
 import { Summary32px, Close } from '@/components/icon'
 import { SummaryForm, addSummary } from '@/services/summary'
+import { Button } from '@/components/ui/Button'
 
 export function SummaryFormCard() {
   const router = useRouter()
@@ -69,16 +70,15 @@ export function SummaryFormCard() {
             <div className="text-gray-medium text-end text-sm">{contentLength}/500</div>
           </div>
         </div>
-
-        <button
-          disabled={!isFilled}
+        <Button
           type="submit"
-          className={`text-gray-medium absolute inset-x-10 bottom-10 h-14 rounded-lg text-lg font-semibold ${
-            isFilled ? 'bg-primary text-white' : 'bg-gray-extraLight text-gray-medium'
-          }`}
+          disabled={!isFilled}
+          variant={'SUMMARY_SUBMIT_BUTTON'}
+          textAlign={'justify-center'}
+          className={`${isFilled && 'bg-primary text-white'}`}
         >
           자동완성
-        </button>
+        </Button>
       </form>
     </div>
   )
