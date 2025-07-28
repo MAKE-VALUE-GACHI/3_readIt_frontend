@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation'
 import { Copy, ClipDefault, Again } from '@/components/icon'
 import { useSummaryQuery } from '@/hooks/fetch/useSummaryQuery'
 import { SummaryForm, addSummary } from '@/services/summary'
+import { Button } from '@/components/ui/Button'
 
-const summaryBtnStyle = 'rounded-4xl mr-2 border px-4 py-2 text-sm cursor-pointer'
 const activeBtnStyle = 'bg-black text-white'
 
 const summaryTypes = [
@@ -77,13 +77,14 @@ export function SummaryResultCard() {
             <div className="flex justify-between">
               <div>
                 {summaryTypes.map(({ key, label }) => (
-                  <button
+                  <Button
                     key={key}
                     onClick={() => onSubmit({ url: originUrl ?? '', content: text ?? '', type: key })}
-                    className={`${summaryBtnStyle} ${type === key ? activeBtnStyle : ''}`}
+                    variant={'SUMMARY_CATEGORY_BUTTON'}
+                    className={type === key ? activeBtnStyle : ''}
                   >
                     {label}
-                  </button>
+                  </Button>
                 ))}
               </div>
               <div className="inline-flex rounded-full bg-[linear-gradient(90deg,#BEBDFF_0%,#9F6BC4_48%,#E26466_100%)] p-[1px]">
