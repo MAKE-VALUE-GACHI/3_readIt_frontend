@@ -8,7 +8,7 @@ import { RotateIcon } from '@/components/motion'
 
 export interface ReaditButtonProps extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
   asChild?: boolean
-  centerText?: boolean
+  textAlign?: string
 
   //Icon 추가 시 사용
   defaultIcon?: React.ReactNode
@@ -47,7 +47,7 @@ function Button({
   directionIcon = false,
   isActive = false,
   asChild = false,
-  centerText = false,
+  textAlign,
   ...props
 }: ReaditButtonProps) {
   const Comp = asChild ? Slot : 'button'
@@ -58,7 +58,7 @@ function Button({
       className={cn(isActive && 'bg-gray-light text-primary', buttonVariants({ variant, className }))}
       {...props}
     >
-      <div className={`flex w-full items-center justify-between ${centerText && 'justify-center'}`}>
+      <div className={`flex w-full items-center justify-between ${textAlign}`}>
         <span className="flex items-center gap-4">
           {
             // isActive 상태에 따라 아이콘 표시해줌
