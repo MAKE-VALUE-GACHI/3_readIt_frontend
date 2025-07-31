@@ -4,20 +4,14 @@ import { useRouter } from 'next/navigation'
 import { useForm, Controller } from 'react-hook-form'
 
 import { Summary32px, Close } from '@/components/icon'
-import { addSummary } from '@/services/summary'
-
-export interface SummaryForm {
-  url: string
-  content: string
-  type: string
-}
+import { SummaryForm, addSummary } from '@/services/summary'
+import { Button } from '@/components/ui/Button'
 
 export function SummaryFormCard() {
   const router = useRouter()
   const { register, handleSubmit, watch, control } = useForm<SummaryForm>()
 
   const onSubmit = async (data: SummaryForm) => {
-    data.type = 'basic'
     const response = await addSummary(data)
 
     if (response.status === 202) {
@@ -38,21 +32,21 @@ export function SummaryFormCard() {
     <div className="relative mr-4 basis-1/3 rounded-xl bg-white p-10">
       <header className="mb-5 flex">
         <Summary32px />
-        <h2 className="ml-1 text-xl font-bold text-[#222222]">요약</h2>
+        <h2 className="text-gray-dark ml-1 text-xl font-bold">요약</h2>
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <label className="text-base font-semibold">링크 요약 정리</label>
-          <div className="flex items-center rounded-xl border-[1.5px] border-[#EEEEEE] bg-[#F8F8F8] p-3">
+          <div className="bg-gray-extraLight border-gray-light flex items-center rounded-xl border-[1.5px] p-3">
             <input type="text" placeholder="https://" className="mr-1 w-full outline-none" {...register('url')} />
-            <Close />
+            {urlValue.length > 0 && <Close />}
           </div>
         </div>
 
         <div>
           <label className="text-base font-semibold">내용 정리</label>
-          <div className="rounded-xl border-[1.5px] border-[#EEEEEE] bg-[#F8F8F8] p-3">
+          <div className="border-gray-light bg-gray-extraLight rounded-xl border-[1.5px] p-3">
             <Controller
               name="content"
               control={control}
@@ -73,19 +67,18 @@ export function SummaryFormCard() {
                 </>
               )}
             />
-            <div className="text-end text-sm text-[#AAAAAA]">{contentLength}/500</div>
+            <div className="text-gray-medium text-end text-sm">{contentLength}/500</div>
           </div>
         </div>
-
-        <button
-          disabled={!isFilled}
+        <Button
           type="submit"
-          className={`absolute inset-x-10 bottom-10 h-14 rounded-lg text-lg font-semibold text-[#aaaaaa] ${
-            isFilled ? 'bg-primary text-white' : 'bg-[#F8F8F8] text-[#aaaaaa]'
-          }`}
+          disabled={!isFilled}
+          variant={'SUMMARY_SUBMIT_BUTTON'}
+          textAlign={'justify-center'}
+          className={`${isFilled && 'bg-primary text-white'}`}
         >
           자동완성
-        </button>
+        </Button>
       </form>
     </div>
   )

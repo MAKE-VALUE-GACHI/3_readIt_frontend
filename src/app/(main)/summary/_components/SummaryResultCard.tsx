@@ -1,14 +1,14 @@
 'use client'
 
+import { useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 import { Copy, ClipDefault, Again } from '@/components/icon'
 import { useSummaryQuery } from '@/hooks/fetch/useSummaryQuery'
-import { SummaryForm } from './SummaryFormCard'
-import { addSummary } from '@/services/summary'
+import { SummaryForm, addSummary } from '@/services/summary'
+import { Button } from '@/components/ui/Button'
 
-const summaryBtnStyle = 'rounded-4xl mr-2 border px-4 py-2 text-sm cursor-pointer'
 const activeBtnStyle = 'bg-black text-white'
 
 const summaryTypes = [
@@ -22,14 +22,16 @@ export function SummaryResultCard() {
   const router = useRouter()
   const { data: summaryData, isLoading } = useSummaryQuery()
 
-  if (!summaryData) return null
-
   const { status, subject, content, text, type, origin_url: originUrl } = summaryData?.data?.data ?? {}
 
-  if (status === 'failed') {
-    alert('요약에 실패하였습니다. 다시 시도해주세요.')
-    router.push(`/summary`)
-  }
+  useEffect(() => {
+    if (status === 'failed') {
+      alert('요약에 실패하였습니다. 다시 시도해주세요.')
+      router.push(`/summary`)
+    }
+  }, [status, router])
+
+  if (!summaryData) return null
 
   const onSubmit = async (data: SummaryForm) => {
     const response = await addSummary(data)
@@ -43,6 +45,7 @@ export function SummaryResultCard() {
 
   const handleCopy = async () => {
     try {
+      if (!content) return
       await navigator.clipboard.writeText(content)
     } catch (err) {
       console.error('복사 실패:', err)
@@ -66,7 +69,7 @@ export function SummaryResultCard() {
               </button>
             </div>
           </div>
-          <hr className="-mx-10 h-px border-[#EEEEEE]" />
+          <hr className="border-gray-light -mx-10 h-px" />
           <div className="flex-1 overflow-auto">
             <div className="mx-auto mb-5 max-w-2xl text-3xl font-semibold">
               <div className="mt-10 leading-[1.5]">{subject}</div>
@@ -74,26 +77,27 @@ export function SummaryResultCard() {
             <div className="flex justify-between">
               <div>
                 {summaryTypes.map(({ key, label }) => (
-                  <button
+                  <Button
                     key={key}
-                    onClick={() => onSubmit({ url: originUrl, content: text, type: key })}
-                    className={`${summaryBtnStyle} ${type === key ? activeBtnStyle : ''}`}
+                    onClick={() => onSubmit({ url: originUrl ?? '', content: text ?? '', type: key })}
+                    variant={'SUMMARY_CATEGORY_BUTTON'}
+                    className={type === key ? activeBtnStyle : ''}
                   >
                     {label}
-                  </button>
+                  </Button>
                 ))}
               </div>
               <div className="inline-flex rounded-full bg-[linear-gradient(90deg,#BEBDFF_0%,#9F6BC4_48%,#E26466_100%)] p-[1px]">
                 <button
                   className="flex cursor-pointer items-center gap-1 rounded-full bg-white px-4 py-2 text-sm text-black"
-                  onClick={() => onSubmit({ url: originUrl, content: text, type })}
+                  onClick={() => onSubmit({ url: originUrl ?? '', content: text ?? '', type: type ?? '' })}
                 >
                   재요약
                   <Again />
                 </button>
               </div>
             </div>
-            <hr className="mb-9 mt-4 border border-[#EEEEEE]" />
+            <hr className="border-gray-light mb-9 mt-4 border" />
             <div>{content}</div>
           </div>
         </>
