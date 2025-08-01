@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button'
 
 export function SummaryFormCard() {
   const router = useRouter()
-  const { register, handleSubmit, watch, control } = useForm<SummaryForm>()
+  const { register, handleSubmit, watch, control, setValue } = useForm<SummaryForm>()
 
   const onSubmit = async (data: SummaryForm) => {
     const response = await addSummary(data)
@@ -40,7 +40,11 @@ export function SummaryFormCard() {
           <label className="text-base font-semibold">링크 요약 정리</label>
           <div className="bg-gray-extraLight border-gray-light flex items-center rounded-xl border-[1.5px] p-3">
             <input type="text" placeholder="https://" className="mr-1 w-full outline-none" {...register('url')} />
-            {urlValue.length > 0 && <Close />}
+            {urlValue.length > 0 && (
+              <button onClick={() => setValue('url', '')}>
+                <Close />
+              </button>
+            )}
           </div>
         </div>
 
