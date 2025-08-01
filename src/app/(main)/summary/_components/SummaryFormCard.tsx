@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useForm, Controller } from 'react-hook-form'
+import clsx from 'clsx'
 
 import { Summary32px, Close } from '@/components/icon'
 import { SummaryForm, addSummary } from '@/services/summary'
@@ -15,7 +16,6 @@ export function SummaryFormCard() {
     const response = await addSummary(data)
 
     if (response.status === 202) {
-      console.log('요청 성공')
       router.push(`/summary/${response.data.data.task_id}`)
     } else {
       alert('요약을 실패하였습니다. 다시 시도해주세요.')
@@ -79,7 +79,7 @@ export function SummaryFormCard() {
           disabled={!isFilled}
           variant={'SUMMARY_SUBMIT_BUTTON'}
           textAlign={'justify-center'}
-          className={`${isFilled && 'bg-primary text-white'}`}
+          className={clsx({ 'bg-primary text-white': isFilled })}
         >
           자동완성
         </Button>
