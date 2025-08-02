@@ -40,7 +40,12 @@ export function SummaryFormCard() {
           <div className="bg-gray-extraLight border-gray-light flex items-center rounded-xl border-[1.5px] p-3">
             <input type="text" placeholder="https://" className="mr-1 w-full outline-none" {...register('url')} />
             {urlValue.length > 0 && (
-              <button onClick={() => setValue('url', '')}>
+              <button
+                onClick={e => {
+                  e.preventDefault()
+                  setValue('url', '')
+                }}
+              >
                 <Close />
               </button>
             )}
