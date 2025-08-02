@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import clsx from 'clsx'
 
 import { Summary32px, Close } from '@/components/icon'
@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/Button'
 
 export function SummaryFormCard() {
   const router = useRouter()
-  const { register, handleSubmit, watch, control, setValue } = useForm<SummaryForm>()
+  const { register, handleSubmit, watch, setValue } = useForm<SummaryForm>()
 
   const onSubmit = async (data: SummaryForm) => {
     const response = await addSummary(data)
@@ -25,7 +25,6 @@ export function SummaryFormCard() {
   const urlValue = watch('url') || ''
   const contentValue = watch('content') || ''
   const contentLength = contentValue.length
-
   const isFilled = urlValue.trim() !== '' || contentValue.trim() !== ''
 
   return (
@@ -51,25 +50,13 @@ export function SummaryFormCard() {
         <div>
           <label className="text-base font-semibold">내용 정리</label>
           <div className="border-gray-light bg-gray-extraLight rounded-xl border-[1.5px] p-3">
-            <Controller
-              name="content"
-              control={control}
-              defaultValue=""
-              rules={{ maxLength: { value: 500, message: '최대 500자까지 입력이 가능합니다.' } }}
-              render={({ field, fieldState }) => (
-                <>
-                  <textarea
-                    {...field}
-                    onChange={e => {
-                      if (e.target.value.length <= 500) field.onChange(e)
-                    }}
-                    placeholder="입력해 주세요"
-                    className="min-h-70 w-full resize-none outline-none"
-                  />
-
-                  {fieldState.error && <p>{fieldState.error.message}</p>}
-                </>
-              )}
+            <textarea
+              {...register('content', {
+                maxLength: { value: 500, message: '최대 500자까지 입력이 가능합니다.' },
+              })}
+              placeholder="입력해 주세요"
+              className="min-h-70 w-full resize-none outline-none"
+              maxLength={500}
             />
             <div className="text-gray-medium text-end text-sm">{contentLength}/500</div>
           </div>
