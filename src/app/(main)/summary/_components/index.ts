@@ -1,3 +1,3 @@
 export { SummaryIntro } from './SummaryIntro'
 export { SummaryFormCard } from './SummaryFormCard'
-export { SummaryResultCard } from './SummaryResultCard'
+export { SummaryResultCard } from './summaryResultCard'
