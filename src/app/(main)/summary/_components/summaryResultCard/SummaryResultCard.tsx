@@ -6,13 +6,13 @@ import { useRouter } from 'next/navigation'
 
 import { useSummaryQuery } from '@/hooks/fetch/useSummaryQuery'
 import { SummaryResultHeader } from './SummaryResultHeader'
-import { SummaryTabNavigation } from './SummaryTabNavigation'
+import { SummaryContentSection } from './SummaryContentSection'
 
 export function SummaryResultCard() {
   const router = useRouter()
   const { data: summaryData, isLoading } = useSummaryQuery()
 
-  const { status, subject, content } = summaryData?.data?.data ?? {}
+  const { status } = summaryData?.data?.data ?? {}
 
   useEffect(() => {
     if (status === 'failed') {
@@ -29,15 +29,7 @@ export function SummaryResultCard() {
         <>
           <SummaryResultHeader />
           <hr className="border-gray-light -mx-10 h-px" />
-
-          <div className="flex-1 overflow-auto">
-            <div className="mx-auto mb-5 max-w-2xl text-3xl font-semibold">
-              <div className="mt-10 leading-[1.5]">{subject}</div>
-            </div>
-            <SummaryTabNavigation />
-            <hr className="border-gray-light mb-9 mt-4 border" />
-            <div>{content}</div>
-          </div>
+          <SummaryContentSection />
         </>
       ) : (
         <div className="flex h-full items-center justify-center">
