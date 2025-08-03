@@ -4,10 +4,11 @@ import { useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-import { Copy, ClipDefault, Again } from '@/components/icon'
+import { Again } from '@/components/icon'
 import { useSummaryQuery } from '@/hooks/fetch/useSummaryQuery'
 import { SummaryForm, addSummary } from '@/services/summary'
 import { Button } from '@/components/ui/Button'
+import { SummaryResultHeader } from './summaryResultCard/SummaryResultHeader'
 
 const activeBtnStyle = 'bg-black text-white'
 
@@ -43,32 +44,11 @@ export function SummaryResultCard() {
     }
   }
 
-  const handleCopy = async () => {
-    try {
-      if (!content) return
-      await navigator.clipboard.writeText(content)
-    } catch (err) {
-      console.error('복사 실패:', err)
-    }
-  }
-
   return (
     <>
       {status === 'completed' || isLoading ? (
         <>
-          <div className="mb-5 flex justify-between">
-            <span className="text-xl font-bold">요약내용</span>
-            <div className="flex">
-              <button className="mr-6 flex cursor-pointer items-center" onClick={handleCopy}>
-                복사하기
-                <Copy className="ml-1" />
-              </button>
-              <button className="flex items-center">
-                스크랩
-                <ClipDefault className="ml-1 h-4 w-4" color="black" />
-              </button>
-            </div>
-          </div>
+          <SummaryResultHeader />
           <hr className="border-gray-light -mx-10 h-px" />
           <div className="flex-1 overflow-auto">
             <div className="mx-auto mb-5 max-w-2xl text-3xl font-semibold">
