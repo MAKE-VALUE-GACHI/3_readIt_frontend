@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import clsx from 'clsx'
 
-import { Summary32px, Close } from '@/components/icon'
+import { Close } from '@/components/icon'
 import { SummaryForm, addSummary } from '@/services/summary'
 import { Button } from '@/components/ui/Button'
+import { SummaryFormHeader } from './SummaryFormHeader'
 
 export function SummaryFormCard() {
   const router = useRouter()
@@ -29,10 +30,7 @@ export function SummaryFormCard() {
 
   return (
     <div className="relative mr-4 basis-1/3 rounded-xl bg-white p-10">
-      <header className="mb-5 flex">
-        <Summary32px />
-        <h2 className="text-gray-dark ml-1 text-xl font-bold">요약</h2>
-      </header>
+      <SummaryFormHeader />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
