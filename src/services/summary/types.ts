@@ -22,7 +22,7 @@ export interface SummaryData {
   text: string
 }
 
-export interface SummaryForm {
+export interface SummaryFormData {
   url: string
   content: string
   type: string

@@ -1,6 +1,6 @@
 'use client'
 
-import { SummaryFormCard, SummaryResultCard } from '../_components'
+import { SummaryFormCard, SummaryResultCard } from '@/app/(main)/summary/_components'
 
 const SummaryDetailPage = () => {
   return (
