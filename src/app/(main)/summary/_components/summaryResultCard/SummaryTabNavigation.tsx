@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation'
 
-import { SummaryForm, addSummary } from '@/services/summary'
+import { SummaryFormData, addSummary } from '@/services/summary'
 import { Again } from '@/components/icon'
 import { Button } from '@/components/ui/Button'
 import { useSummaryQuery } from '@/hooks/fetch/useSummaryQuery'
@@ -20,7 +20,7 @@ export function SummaryTabNavigation() {
 
   const { text, type, origin_url: originUrl } = summaryData?.data?.data ?? {}
 
-  const onSubmit = async (data: SummaryForm) => {
+  const onSubmit = async (data: SummaryFormData) => {
     const response = await addSummary(data)
 
     if (response.status === 202) {
