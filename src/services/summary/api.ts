@@ -1,7 +1,7 @@
 import { apiClient } from '@/lib/httpClient'
-import { SummaryForm, SummaryResponse } from './types'
+import { SummaryFormData, SummaryResponse } from '.'
 
-export const addSummary = ({ url, content, type }: SummaryForm) => {
+export const addSummary = ({ url, content, type }: SummaryFormData) => {
   return apiClient.post(
     `/scrap/summaries`,
     {
