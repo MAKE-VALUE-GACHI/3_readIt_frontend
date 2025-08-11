@@ -30,6 +30,7 @@ const buttonVariants = cva(
           'flex items-center gap-2 w-full px-2 py-2 text-sm font-medium rounded-md bg-white text-muted-foreground hover:bg-gray-light hover:text-primary active:bg-gray-light active:text-primary',
         SUMMARY_SUBMIT_BUTTON:
           'absolute inset-x-10 bottom-10 h-14 rounded-lg text-lg font-semibold bg-gray-extraLight text-gray-medium',
+        SUMMARY_CATEGORY_BUTTON: 'rounded-4xl mr-2 border px-4 py-2 text-sm cursor-pointer',
       },
     },
     defaultVariants: {
